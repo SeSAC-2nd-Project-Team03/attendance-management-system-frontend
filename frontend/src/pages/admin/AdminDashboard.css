@@ -1,0 +1,72 @@
+.admin-stats {
+  margin-bottom: 24px;
+}
+
+.admin-quick-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-action {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.2s;
+}
+
+.admin-action:hover {
+  background: var(--primary-dark);
+  color: white;
+  transform: translateX(4px);
+}
+
+.admin-action .action-icon {
+  font-size: 1.5rem;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.admin-action:hover .action-icon {
+  color: var(--accent-light);
+}
+
+.admin-action div {
+  flex: 1;
+}
+
+.admin-action h4 {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.admin-action p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.admin-action:hover p {
+  color: var(--text-light);
+}
+
+.download-section {
+  text-align: center;
+  padding: 20px;
+}
+
+.download-desc {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.download-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+

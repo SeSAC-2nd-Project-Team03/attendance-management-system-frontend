@@ -1,0 +1,79 @@
+.leave-form-card {
+  max-width: 600px;
+}
+
+.leave-form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.file-upload {
+  border: 2px dashed #e2e8f0;
+  border-radius: var(--radius-md);
+  transition: border-color 0.2s;
+}
+
+.file-upload:hover {
+  border-color: var(--accent);
+}
+
+.file-input-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  gap: 8px;
+}
+
+.file-input-label svg {
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+.file-preview {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+}
+
+.file-name {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.file-remove {
+  background: none;
+  border: none;
+  color: var(--error);
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 4px;
+  display: flex;
+  transition: transform 0.2s;
+}
+
+.file-remove:hover {
+  transform: scale(1.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e2e8f0;
+}
+

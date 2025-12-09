@@ -1,0 +1,97 @@
+.date-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.date-input {
+  max-width: 200px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.attendance-detail {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.attendance-summary {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.summary-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.summary-item .badge {
+  font-size: 1rem;
+  padding: 8px 20px;
+}
+
+.attendance-slots-detail {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.slot-detail {
+  background: #f8fafc;
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.slot-detail:hover {
+  transform: translateY(-4px);
+}
+
+.slot-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.slot-emoji {
+  font-size: 2.5rem;
+}
+
+.slot-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.slot-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.slot-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .attendance-slots-detail {
+    grid-template-columns: 1fr;
+  }
+}
+

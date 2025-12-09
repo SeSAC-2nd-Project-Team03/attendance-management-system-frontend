@@ -1,0 +1,31 @@
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.filter-card {
+  margin-bottom: 24px;
+}
+
+.filter-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  margin-bottom: 0;
+  min-width: 150px;
+}
+
+.filter-row .btn {
+  height: fit-content;
+}
+
+.hint {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
