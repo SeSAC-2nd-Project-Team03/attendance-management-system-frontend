@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { 
   FiHome, FiCheckSquare, FiCalendar, FiFileText, 
-  FiBell, FiUsers, FiBarChart2 
+  FiBell, FiUsers, FiBarChart2, FiSettings 
 } from 'react-icons/fi';
 import './Sidebar.css';
 
@@ -22,7 +22,8 @@ export default function Sidebar() {
     { path: '/admin', icon: <FiBarChart2 />, label: '관리자 대시보드' },
     { path: '/admin/members', icon: <FiUsers />, label: '회원 관리' },
     { path: '/admin/attendances', icon: <FiCheckSquare />, label: '출석 관리' },
-    { path: '/admin/leaves', icon: <FiFileText />, label: '휴가 관리' },
+    { path: '/admin/attendance-config', icon: <FiSettings />, label: '출석 설정 관리' },
+    { path: '/admin/leaves', icon: <FiFileText />, label: '휴가/조퇴 관리' },
     { path: '/admin/notices', icon: <FiBell />, label: '공지사항 관리' },
   ];
 

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { useNotification } from '../context/NotificationContext';
 import { attendanceAPI } from '../api/attendance';
 import { FiCheckCircle, FiClock, FiHash } from 'react-icons/fi';
 import { getAttendanceTypeKorean } from '../utils/dateUtils';
@@ -8,7 +7,6 @@ import './AttendancePage.css';
 
 export default function AttendancePage() {
   const { user } = useAuth();
-  const { addNotification } = useNotification();
   const [inputNumber, setInputNumber] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const [useAuto, setUseAuto] = useState(true);
@@ -57,11 +55,6 @@ export default function AttendancePage() {
       setResult(response);
       if (response.success) {
         setInputNumber('');
-        // 알림 추가
-        addNotification({
-          type: 'attendance',
-          message: `출석 체크 완료! ${response.message}`,
-        });
       }
     } catch (error) {
       setResult({

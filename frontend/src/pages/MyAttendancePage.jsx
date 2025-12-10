@@ -85,8 +85,8 @@ export default function MyAttendancePage() {
             <div className="attendance-summary">
               <div className="summary-item">
                 <span className="summary-label">최종 상태</span>
-                <span className={`badge ${getStatusBadgeClass(attendance.overallStatus)}`}>
-                  {attendance.overallStatusDescription || getAttendanceStatusKorean(attendance.overallStatus) || '미등록'}
+                <span className={`badge ${getStatusBadgeClass(attendance.finalStatus)}`}>
+                  {getAttendanceStatusKorean(attendance.finalStatus) || '미등록'}
                 </span>
               </div>
             </div>
@@ -101,8 +101,8 @@ export default function MyAttendancePage() {
                   <span className={`badge ${getStatusBadgeClass(attendance.morningStatus)}`}>
                     {getAttendanceStatusKorean(attendance.morningStatus) || '-'}
                   </span>
-                  {attendance.details?.find(d => d.type === 'MORNING')?.checkTime && (
-                    <span className="slot-time">{attendance.details.find(d => d.type === 'MORNING').checkTime}</span>
+                  {attendance.morningCheckTime && (
+                    <span className="slot-time">{attendance.morningCheckTime}</span>
                   )}
                 </div>
               </div>
@@ -116,8 +116,8 @@ export default function MyAttendancePage() {
                   <span className={`badge ${getStatusBadgeClass(attendance.lunchStatus)}`}>
                     {getAttendanceStatusKorean(attendance.lunchStatus) || '-'}
                   </span>
-                  {attendance.details?.find(d => d.type === 'LUNCH')?.checkTime && (
-                    <span className="slot-time">{attendance.details.find(d => d.type === 'LUNCH').checkTime}</span>
+                  {attendance.lunchCheckTime && (
+                    <span className="slot-time">{attendance.lunchCheckTime}</span>
                   )}
                 </div>
               </div>
@@ -131,8 +131,8 @@ export default function MyAttendancePage() {
                   <span className={`badge ${getStatusBadgeClass(attendance.dinnerStatus)}`}>
                     {getAttendanceStatusKorean(attendance.dinnerStatus) || '-'}
                   </span>
-                  {attendance.details?.find(d => d.type === 'DINNER')?.checkTime && (
-                    <span className="slot-time">{attendance.details.find(d => d.type === 'DINNER').checkTime}</span>
+                  {attendance.dinnerCheckTime && (
+                    <span className="slot-time">{attendance.dinnerCheckTime}</span>
                   )}
                 </div>
               </div>

@@ -41,13 +41,16 @@ export default function DashboardPage() {
       }
       setRecentNotices(noticesRes.content || noticesRes || []);
       
-      // 팝업 공지가 있으면 표시
-      const popups = popupRes || [];
+      // 팝업 공지사항 처리
+      const popups = popupRes?.data || popupRes || [];
       if (popups.length > 0) {
-        setPopupNotices(popups);
-        // 오늘 이미 닫았는지 확인
-        const closedToday = localStorage.getItem('popupClosedDate') === getTodayString();
-        if (!closedToday) {
+        // 오늘 닫은 팝업 확인 (전체 팝업에 대해)
+        const closedAllPopups = localStorage.getItem('closedAllPopupsDate');
+        const today = getTodayString();
+        
+        // 오늘 전체 닫기를 하지 않은 경우에만 표시
+        if (closedAllPopups !== today) {
+          setPopupNotices(popups);
           setShowPopup(true);
         }
       }
@@ -58,11 +61,15 @@ export default function DashboardPage() {
     }
   };
 
-  const closePopup = (dontShowToday = false) => {
+  // 팝업 닫기 (오늘 하루 안 보기)
+  const handleClosePopupToday = () => {
+    localStorage.setItem('closedAllPopupsDate', getTodayString());
     setShowPopup(false);
-    if (dontShowToday) {
-      localStorage.setItem('popupClosedDate', getTodayString());
-    }
+  };
+
+  // 팝업 바로 닫기
+  const handleClosePopupNow = () => {
+    setShowPopup(false);
   };
 
   const getGreeting = () => {
@@ -91,42 +98,6 @@ export default function DashboardPage() {
 
   return (
     <div className="page-container">
-      {/* 팝업 공지 모달 */}
-      {showPopup && popupNotices.length > 0 && (
-        <div className="popup-overlay" onClick={() => closePopup()}>
-          <div className="popup-modal" onClick={(e) => e.stopPropagation()}>
-            <div className="popup-header">
-              <h2>📢 공지사항</h2>
-              <button className="popup-close" onClick={() => closePopup()}>
-                <FiX />
-              </button>
-            </div>
-            <div className="popup-content">
-              {popupNotices.map((notice) => (
-                <div key={notice.id} className="popup-notice">
-                  <h3>{notice.title}</h3>
-                  <p>{notice.content}</p>
-                </div>
-              ))}
-            </div>
-            <div className="popup-footer">
-              <button 
-                className="btn btn-secondary btn-sm"
-                onClick={() => closePopup(true)}
-              >
-                오늘 하루 보지 않기
-              </button>
-              <button 
-                className="btn btn-primary btn-sm"
-                onClick={() => closePopup()}
-              >
-                닫기
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="page-header">
         <h1 className="page-title">👋 {getGreeting()}</h1>
         <p className="page-subtitle">{user?.name || '학생'}님, 오늘도 화이팅!</p>
@@ -263,6 +234,56 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* 팝업 공지사항 모달 */}
+      {showPopup && popupNotices.length > 0 && (
+        <div className="popup-overlay">
+          <div className="popup-modal">
+            <div className="popup-header">
+              <span className="popup-badge">📢 공지사항 ({popupNotices.length}건)</span>
+              <button className="popup-close-btn" onClick={handleClosePopupNow}>
+                <FiX />
+              </button>
+            </div>
+            <div className="popup-scroll-content">
+              {popupNotices.map((notice, index) => (
+                <div key={notice.id} className="popup-notice-item">
+                  {index > 0 && <div className="popup-divider" />}
+                  <div className="popup-notice-header">
+                    <span className="popup-notice-number">{index + 1}</span>
+                    <h3 className="popup-notice-title">{notice.title}</h3>
+                  </div>
+                  <div 
+                    className="popup-notice-body"
+                    dangerouslySetInnerHTML={{ __html: notice.content }}
+                  />
+                  <Link 
+                    to={`/notices/${notice.id}`}
+                    className="popup-detail-link"
+                    onClick={() => setShowPopup(false)}
+                  >
+                    자세히 보기 →
+                  </Link>
+                </div>
+              ))}
+            </div>
+            <div className="popup-footer">
+              <button 
+                className="btn btn-secondary"
+                onClick={handleClosePopupToday}
+              >
+                오늘 하루 안 보기
+              </button>
+              <button 
+                className="btn btn-primary"
+                onClick={handleClosePopupNow}
+              >
+                닫기
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

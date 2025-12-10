@@ -13,8 +13,8 @@ export default function MemberManagement() {
     loginId: '',
     password: '',
     name: '',
-    address: '',
-    phoneNumber: '',
+    email: '',
+    phone: '',
     role: 'STUDENT',
   });
 
@@ -68,8 +68,8 @@ export default function MemberManagement() {
     setFormData({
       loginId: member.loginId,
       name: member.name,
-      address: member.address || '',
-      phoneNumber: member.phoneNumber || '',
+      email: member.email || '',
+      phone: member.phone || '',
       role: member.role,
     });
     setShowModal(true);
@@ -86,8 +86,8 @@ export default function MemberManagement() {
       loginId: '',
       password: '',
       name: '',
-      address: '',
-      phoneNumber: '',
+      email: '',
+      phone: '',
       role: 'STUDENT',
     });
   };
@@ -116,7 +116,7 @@ export default function MemberManagement() {
                 <tr>
                   <th>아이디</th>
                   <th>이름</th>
-                  <th>주소</th>
+                  <th>이메일</th>
                   <th>연락처</th>
                   <th>역할</th>
                   <th>액션</th>
@@ -127,8 +127,8 @@ export default function MemberManagement() {
                   <tr key={member.loginId}>
                     <td>{member.loginId}</td>
                     <td>{member.name}</td>
-                    <td>{member.address || '-'}</td>
-                    <td>{member.phoneNumber || '-'}</td>
+                    <td>{member.email || '-'}</td>
+                    <td>{member.phone || '-'}</td>
                     <td>
                       <span className={`badge ${member.role === 'ADMIN' ? 'badge-info' : 'badge-success'}`}>
                         {member.role === 'ADMIN' ? '관리자' : '학생'}
@@ -212,12 +212,12 @@ export default function MemberManagement() {
                 />
               </div>
               <div className="input-group">
-                <label className="input-label">주소</label>
+                <label className="input-label">이메일</label>
                 <input
-                  type="text"
+                  type="email"
                   className="input-field"
-                  value={formData.address}
-                  onChange={(e) => setFormData({...formData, address: e.target.value})}
+                  value={formData.email}
+                  onChange={(e) => setFormData({...formData, email: e.target.value})}
                 />
               </div>
               <div className="input-group">
@@ -225,8 +225,8 @@ export default function MemberManagement() {
                 <input
                   type="tel"
                   className="input-field"
-                  value={formData.phoneNumber}
-                  onChange={(e) => setFormData({...formData, phoneNumber: e.target.value})}
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
                 />
               </div>
               <div className="input-group">

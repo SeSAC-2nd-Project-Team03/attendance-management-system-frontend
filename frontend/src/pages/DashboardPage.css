@@ -165,7 +165,13 @@
   font-size: 0.85rem;
 }
 
-/* 팝업 공지 모달 */
+@media (max-width: 768px) {
+  .attendance-slots {
+    flex-direction: column;
+  }
+}
+
+/* 팝업 공지사항 모달 */
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -176,25 +182,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
-  backdrop-filter: blur(4px);
+  z-index: 2000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .popup-modal {
   background: white;
-  border-radius: var(--radius-lg);
-  width: 90%;
-  max-width: 500px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 520px;
   max-height: 80vh;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: popupSlideIn 0.3s ease-out;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+  animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-@keyframes popupSlideIn {
+@keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(-20px) scale(0.95);
+    transform: translateY(40px) scale(0.95);
   }
   to {
     opacity: 1;
@@ -207,22 +219,22 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 24px;
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   color: white;
 }
 
-.popup-header h2 {
-  font-size: 1.25rem;
-  margin: 0;
+.popup-badge {
+  font-weight: 600;
+  font-size: 0.95rem;
 }
 
-.popup-close {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
+.popup-close-btn {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -230,58 +242,122 @@
   transition: background 0.2s;
 }
 
-.popup-close:hover {
+.popup-close-btn:hover {
   background: rgba(255, 255, 255, 0.3);
 }
 
-.popup-content {
-  padding: 24px;
+/* 스크롤 가능한 팝업 컨텐츠 */
+.popup-scroll-content {
+  padding: 0;
   max-height: 400px;
   overflow-y: auto;
 }
 
-.popup-notice {
-  margin-bottom: 20px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #e2e8f0;
+.popup-scroll-content::-webkit-scrollbar {
+  width: 8px;
 }
 
-.popup-notice:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
+.popup-scroll-content::-webkit-scrollbar-track {
+  background: #f1f5f9;
 }
 
-.popup-notice h3 {
+.popup-scroll-content::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.popup-scroll-content::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.popup-notice-item {
+  padding: 20px 24px;
+}
+
+.popup-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+  margin: 0 24px;
+}
+
+.popup-notice-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.popup-notice-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: white;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.popup-notice-title {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-bottom: 12px;
-  color: var(--text-primary);
+  color: #1e293b;
+  line-height: 1.4;
+  margin: 0;
 }
 
-.popup-notice p {
-  color: var(--text-secondary);
-  line-height: 1.6;
-  white-space: pre-wrap;
+.popup-notice-body {
+  color: #475569;
+  line-height: 1.7;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  padding-left: 40px;
+}
+
+.popup-notice-body br {
+  display: block;
+  margin: 6px 0;
+}
+
+.popup-detail-link {
+  display: inline-block;
+  margin-left: 40px;
+  color: #6366f1;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.popup-detail-link:hover {
+  color: #4f46e5;
+  text-decoration: underline;
 }
 
 .popup-footer {
   display: flex;
-  justify-content: flex-end;
   gap: 12px;
-  padding: 16px 24px;
+  padding: 20px 24px;
   background: #f8fafc;
   border-top: 1px solid #e2e8f0;
 }
 
-@media (max-width: 768px) {
-  .attendance-slots {
-    flex-direction: column;
-  }
+.popup-footer .btn {
+  flex: 1;
+  justify-content: center;
+}
 
+@media (max-width: 480px) {
   .popup-modal {
-    width: 95%;
     margin: 16px;
+    max-height: 85vh;
+  }
+  
+  .popup-footer {
+    flex-direction: column;
   }
 }
 

@@ -1,15 +1,21 @@
-.filter-card {
-  margin-bottom: 24px;
+/* 대기 중 배지 */
+.pending-badge {
+  margin-left: 12px;
+  padding: 4px 10px;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  animation: pulse 2s infinite;
 }
 
-.filter-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
+/* 필터 버튼 그룹 */
 .filter-buttons {
   display: flex;
   gap: 8px;
@@ -18,100 +24,79 @@
 
 .filter-btn {
   padding: 8px 16px;
-  border: 1px solid #e2e8f0;
-  background: white;
-  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color, #e2e8f0);
+  border-radius: 8px;
+  background: var(--bg-secondary, #f8fafc);
+  color: var(--text-secondary, #64748b);
   cursor: pointer;
-  font-weight: 500;
-  transition: all 0.2s;
-  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
 }
 
 .filter-btn:hover {
-  background: #f8fafc;
-  border-color: var(--primary);
+  background: var(--bg-hover, #f1f5f9);
+  border-color: var(--primary-color, #6366f1);
 }
 
 .filter-btn.active {
-  background: var(--primary);
+  background: var(--primary-color, #6366f1);
   color: white;
-  border-color: var(--primary);
+  border-color: var(--primary-color, #6366f1);
 }
 
-.filter-btn.pending {
-  position: relative;
-}
-
-.filter-btn.pending.active {
-  background: var(--warning);
-  border-color: var(--warning);
-}
-
+/* 대기 중인 행 강조 */
 .pending-row {
-  background: #fffbeb;
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.1), transparent) !important;
 }
 
 .pending-row:hover {
-  background: #fef3c7 !important;
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.2), rgba(0,0,0,0.02)) !important;
 }
 
-.member-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.member-name {
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.member-id {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
+/* 사유 셀 */
 .reason-cell {
   max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  cursor: help;
 }
 
+/* 휴가 유형 */
+.leave-type {
+  font-weight: 500;
+  color: var(--text-primary, #1e293b);
+}
+
+/* 액션 버튼 그룹 */
 .action-buttons {
   display: flex;
   gap: 8px;
 }
 
 .btn-success {
-  background: var(--success);
+  background: linear-gradient(135deg, #10b981, #059669);
   color: white;
   border: none;
 }
 
 .btn-success:hover {
-  background: #059669;
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-1px);
 }
 
-.no-file {
-  color: var(--text-secondary);
+.btn-error {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border: none;
 }
 
-.processed-info {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+.btn-error:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-1px);
 }
 
-.reject-reason {
-  font-size: 0.85rem;
-  color: var(--error);
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-/* 모달 스타일 */
+/* 모달 */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -123,83 +108,104 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  animation: fadeIn 0.2s ease;
 }
 
-.modal {
-  background: white;
-  border-radius: var(--radius-lg);
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-content {
+  background: var(--bg-primary, white);
+  border-radius: 16px;
+  padding: 24px;
   width: 90%;
-  max-width: 500px;
+  max-width: 480px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
 }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid #e2e8f0;
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .modal-title {
   font-size: 1.25rem;
   font-weight: 600;
-  margin: 0;
+  color: var(--text-primary, #1e293b);
+  margin-bottom: 8px;
 }
 
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--text-secondary);
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-close:hover {
-  color: var(--text-primary);
-}
-
-.modal-body {
-  padding: 24px;
+.modal-subtitle {
+  color: var(--text-secondary, #64748b);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
 }
 
 .modal-actions {
   display: flex;
-  justify-content: flex-end;
   gap: 12px;
-  padding: 16px 24px;
-  border-top: 1px solid #e2e8f0;
-  background: #f8fafc;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 .textarea {
-  resize: vertical;
   min-height: 100px;
+  resize: vertical;
+  font-family: inherit;
 }
 
+/* 회원 정보 */
+.member-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.member-name {
+  font-weight: 500;
+  color: var(--text-primary, #1e293b);
+}
+
+/* 처리 완료 텍스트 */
+.text-muted {
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.9rem;
+}
+
+/* 필터 그룹 */
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary, #64748b);
+}
+
+/* 반응형 */
 @media (max-width: 768px) {
   .filter-buttons {
     width: 100%;
-    justify-content: center;
   }
-
+  
   .filter-btn {
     flex: 1;
-    min-width: 80px;
     text-align: center;
   }
-
+  
   .action-buttons {
     flex-direction: column;
   }
-
-  .modal {
-    width: 95%;
+  
+  .modal-content {
     margin: 16px;
+    width: calc(100% - 32px);
   }
 }
 

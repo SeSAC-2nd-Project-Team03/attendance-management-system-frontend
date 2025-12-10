@@ -35,7 +35,7 @@ export const adminAPI = {
   // ===== 출석 관리 =====
   // 과정별 수강생 조회
   getEnrollments: async (courseId) => {
-    const response = await api.get('/attendances/admin/enrollment', {
+    const response = await api.get('/admin/enrollment', {
       params: { courseId }
     });
     return response.data;
@@ -51,21 +51,35 @@ export const adminAPI = {
 
   // 전체 출석 현황 조회
   getDailyAttendance: async (workDate, courseId) => {
-    const response = await api.get('/attendances/admin/daily-status', {
+    const response = await api.get('/admin/daily-attendance', {
       params: { workDate, courseId }
     });
     return response.data;
   },
 
-  // 출석 상태 변경
+  // 출석 상태 변경 (dailyAttendanceId 기반)
   changeAttendanceStatus: async (id) => {
     const response = await api.patch(`/attendances/admin/${id}`);
     return response.data;
   },
 
+  // 출석 상태 변경 (memberId 기반) - dailyAttendanceId가 없어도 동작
+  changeAttendanceStatusByMember: async (memberId, courseId, date) => {
+    const response = await api.patch(`/attendances/admin/member/${memberId}`, null, {
+      params: { courseId, date }
+    });
+    return response.data;
+  },
+
+  // 출석 상태 개별 변경 (아침/점심/저녁/전체 각각 변경)
+  updateAttendanceStatus: async (data) => {
+    const response = await api.put('/attendances/admin/status', data);
+    return response.data;
+  },
+
   // 조퇴/결석 승인
   approveLeave: async (id) => {
-    const response = await api.patch(`/attendances/admin/${id}`);
+    const response = await api.patch(`/admin/leaves/${id}`);
     return response.data;
   },
 
@@ -100,7 +114,7 @@ export const adminAPI = {
   // ===== 휴가 관리 =====
   // 휴가 승인
   approveLeaveRequest: async (id, adminLoginId) => {
-    const response = await api.patch(`/leave-requests/admin/${id}/approve`, null, {
+    const response = await api.patch(`/leave-requests/${id}/approve`, null, {
       headers: { 'Admin-Login-Id': adminLoginId }
     });
     return response.data;
@@ -108,7 +122,7 @@ export const adminAPI = {
 
   // 휴가 반려
   rejectLeaveRequest: async (id, adminLoginId, reason) => {
-    const response = await api.patch(`/leave-requests/admin/${id}/reject`, null, {
+    const response = await api.patch(`/leave-requests/${id}/reject`, null, {
       params: { reason },
       headers: { 'Admin-Login-Id': adminLoginId }
     });
