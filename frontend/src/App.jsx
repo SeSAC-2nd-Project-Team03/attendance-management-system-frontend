@@ -20,8 +20,9 @@ import NoticeDetailPage from './pages/NoticeDetailPage';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import MemberManagement from './pages/admin/MemberManagement';
 import AttendanceManagement from './pages/admin/AttendanceManagement';
-import NoticeManagement from './pages/admin/NoticeManagement';
+import AttendanceConfigManagement from './pages/admin/AttendanceConfigManagement';
 import LeaveManagement from './pages/admin/LeaveManagement';
+import NoticeManagement from './pages/admin/NoticeManagement';
 
 import './App.css';
 
@@ -85,11 +86,14 @@ export default function App() {
         <Route path="/admin/attendances" element={
           <ProtectedRoute adminOnly><AttendanceManagement /></ProtectedRoute>
         } />
-        <Route path="/admin/notices" element={
-          <ProtectedRoute adminOnly><NoticeManagement /></ProtectedRoute>
+        <Route path="/admin/attendance-config" element={
+          <ProtectedRoute adminOnly><AttendanceConfigManagement /></ProtectedRoute>
         } />
         <Route path="/admin/leaves" element={
           <ProtectedRoute adminOnly><LeaveManagement /></ProtectedRoute>
+        } />
+        <Route path="/admin/notices" element={
+          <ProtectedRoute adminOnly><NoticeManagement /></ProtectedRoute>
         } />
 
         {/* Redirect */}

@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { useNotification } from '../context/NotificationContext';
 import { FiUser, FiLock, FiLogIn } from 'react-icons/fi';
 import './LoginPage.css';
 
@@ -11,14 +10,15 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   
-  const { login, isAuthenticated, user } = useAuth();
-  const { addNotification } = useNotification();
+  const { login, isAuthenticated, isAdmin } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // 이미 로그인된 상태면 역할에 따라 대시보드로 이동
+  // 이미 로그인된 경우 역할에 따라 리디렉션
   if (isAuthenticated) {
-    const targetPath = user?.role === 'ADMIN' ? '/admin' : '/dashboard';
-    navigate(targetPath, { replace: true });
+    const defaultPath = isAdmin ? '/admin' : '/dashboard';
+    const from = location.state?.from?.pathname || defaultPath;
+    navigate(from, { replace: true });
     return null;
   }
 
@@ -28,15 +28,10 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const data = await login(loginId, password);
-      // 알림 추가
-      addNotification({
-        type: 'info',
-        message: `${data.name || loginId}님, 환영합니다! 로그인되었습니다.`,
-      });
-      // 역할에 따라 적절한 대시보드로 이동
-      const targetPath = data.role === 'ADMIN' ? '/admin' : '/dashboard';
-      navigate(targetPath, { replace: true });
+      const userData = await login(loginId, password);
+      // 역할에 따라 다른 페이지로 이동
+      const redirectPath = userData.role === 'ADMIN' ? '/admin' : '/dashboard';
+      navigate(redirectPath, { replace: true });
     } catch (err) {
       setError('로그인에 실패했습니다. 아이디와 비밀번호를 확인해주세요.');
     } finally {

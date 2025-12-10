@@ -1,15 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { useNotification } from '../context/NotificationContext';
 import { leaveAPI } from '../api/leave';
 import { FiFileText, FiUpload, FiX } from 'react-icons/fi';
-import { getTodayString, getLeaveTypeKorean } from '../utils/dateUtils';
+import { getTodayString } from '../utils/dateUtils';
 import './LeaveRequestPage.css';
 
 export default function LeaveRequestPage() {
   const { user } = useAuth();
-  const { addNotification } = useNotification();
   const navigate = useNavigate();
   
   const [formData, setFormData] = useState({
@@ -22,9 +20,11 @@ export default function LeaveRequestPage() {
   const [error, setError] = useState('');
 
   const leaveTypes = [
-    { value: 'SICK_LEAVE', label: '병가' },
-    { value: 'ABSENCE', label: '결석/공가' },
+    { value: 'SICK', label: '병가' },
+    { value: 'PERSONAL', label: '개인 사유' },
+    { value: 'OFFICIAL', label: '공가' },
     { value: 'EARLY_LEAVE', label: '조퇴' },
+    { value: 'OTHER', label: '기타' },
   ];
 
   const handleChange = (e) => {
@@ -66,11 +66,6 @@ export default function LeaveRequestPage() {
 
     try {
       await leaveAPI.createLeaveRequest(user?.loginId || 'student1', formData, file);
-      // 알림 추가
-      addNotification({
-        type: 'leave',
-        message: `${getLeaveTypeKorean(formData.leaveType)} 신청이 완료되었습니다. 승인 대기 중입니다.`,
-      });
       alert('휴가 신청이 완료되었습니다.');
       navigate('/my-leaves');
     } catch (err) {

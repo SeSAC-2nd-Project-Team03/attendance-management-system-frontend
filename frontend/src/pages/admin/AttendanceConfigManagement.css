@@ -1,0 +1,273 @@
+/* 설정 카드 그리드 */
+.config-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* 설정 카드 */
+.config-card {
+  background: var(--bg-primary, white);
+  border-radius: 16px;
+  border-top: 4px solid;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.config-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.config-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.config-type-icon {
+  font-size: 2rem;
+}
+
+.config-type-label {
+  flex: 1;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.config-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.icon-btn.edit {
+  background: rgba(99, 102, 241, 0.1);
+  color: #6366f1;
+}
+
+.icon-btn.edit:hover {
+  background: #6366f1;
+  color: white;
+}
+
+.icon-btn.delete {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.icon-btn.delete:hover {
+  background: #ef4444;
+  color: white;
+}
+
+/* 카드 내용 */
+.config-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.config-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.config-item-icon {
+  font-size: 1.25rem;
+  color: #64748b;
+  width: 24px;
+  text-align: center;
+}
+
+.config-item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.config-item-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.config-item-value {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.config-item-value.auth-number {
+  font-family: 'Courier New', monospace;
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+  color: #6366f1;
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* 카드 푸터 */
+.config-card-footer {
+  padding: 12px 20px;
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.config-date {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* 빈 상태 */
+.empty-state-full {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-primary, white);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.empty-state-full .empty-state-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.empty-state-full h3 {
+  font-size: 1.25rem;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.empty-state-full p {
+  color: #64748b;
+  margin-bottom: 24px;
+}
+
+/* 모달 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 시간 설정 안내 박스 */
+.time-guide-box {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border: 1px solid #86efac;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.time-guide-box p {
+  margin: 0 0 12px 0;
+  color: #166534;
+  font-size: 0.9rem;
+}
+
+.time-guide-box ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.time-guide-box li {
+  color: #15803d;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.form-grid .input-group {
+  margin-bottom: 0;
+}
+
+.input-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .config-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal-content {
+    margin: 16px;
+  }
+}
+

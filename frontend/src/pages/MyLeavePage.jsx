@@ -82,7 +82,7 @@ export default function MyLeavePage() {
               <tbody>
                 {leaves.map((leave) => (
                   <tr key={leave.id}>
-                    <td>{formatDate(leave.requestedAt)}</td>
+                    <td>{formatDate(leave.createdAt)}</td>
                     <td>{formatDate(leave.startDate)}</td>
                     <td>{getLeaveTypeKorean(leave.leaveType)}</td>
                     <td className="reason-cell">{leave.reason}</td>

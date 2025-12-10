@@ -48,10 +48,9 @@ export const getAttendanceStatusKorean = (status) => {
     PRESENT: '출석',
     LATE: '지각',
     ABSENT: '결석',
+    LEAVE: '조퇴',
     EARLY_LEAVE: '조퇴',
     EXCUSED: '공결',
-    NONE: '미체크',
-    LEAVE: '조퇴',
     OFFICIAL_LEAVE: '공결',
   };
   return statuses[status] || status;
@@ -59,9 +58,11 @@ export const getAttendanceStatusKorean = (status) => {
 
 export const getLeaveTypeKorean = (type) => {
   const types = {
-    SICK_LEAVE: '병가',
-    ABSENCE: '결석/공가',
+    SICK: '병가',
+    PERSONAL: '개인 사유',
+    OFFICIAL: '공가',
     EARLY_LEAVE: '조퇴',
+    OTHER: '기타',
   };
   return types[type] || type;
 };

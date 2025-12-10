@@ -35,5 +35,33 @@ export const leaveAPI = {
     });
     return response.data;
   },
+
+  // ===== 관리자용 API =====
+  
+  // [관리자] 모든 휴가 신청 조회
+  getAllLeaveRequests: async () => {
+    const response = await api.get('/leave-requests/admin');
+    return response.data;
+  },
+
+  // [관리자] 대기 중인 휴가 신청 조회
+  getPendingLeaveRequests: async () => {
+    const response = await api.get('/leave-requests/admin/pending');
+    return response.data;
+  },
+
+  // [관리자] 휴가 신청 승인
+  approveLeaveRequest: async (id) => {
+    const response = await api.patch(`/leave-requests/admin/${id}/approve`);
+    return response.data;
+  },
+
+  // [관리자] 휴가 신청 반려
+  rejectLeaveRequest: async (id, reason) => {
+    const response = await api.patch(`/leave-requests/admin/${id}/reject`, null, {
+      params: { reason }
+    });
+    return response.data;
+  },
 };
 

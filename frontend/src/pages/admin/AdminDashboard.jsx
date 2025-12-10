@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { adminAPI } from '../../api/admin';
 import { 
   FiBarChart2, FiUsers, FiCheckSquare, FiBell,
-  FiDownload, FiArrowRight, FiFileText 
+  FiDownload, FiArrowRight 
 } from 'react-icons/fi';
 import { getTodayString } from '../../utils/dateUtils';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -126,14 +126,6 @@ export default function AdminDashboard() {
               <div>
                 <h4>공지사항 관리</h4>
                 <p>공지 생성, 수정, 삭제</p>
-              </div>
-              <FiArrowRight />
-            </Link>
-            <Link to="/admin/leaves" className="admin-action">
-              <FiFileText className="action-icon" />
-              <div>
-                <h4>휴가 관리</h4>
-                <p>휴가 신청 확인, 승인, 반려</p>
               </div>
               <FiArrowRight />
             </Link>
